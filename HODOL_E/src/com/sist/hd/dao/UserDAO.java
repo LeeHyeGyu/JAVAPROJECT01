@@ -23,7 +23,6 @@ public class UserDAO {
 	public HashMap<String, UserVO> map = new HashMap<String, UserVO>();
 
 	public UserDAO() {
-		readCSV_TO_List();
 		readCSV_TO_Map();
 	}
 
@@ -49,8 +48,8 @@ public class UserDAO {
 	}
 
 	public DTO do_selectOne(DTO dto) {
-		UserVO inVO = (UserVO) dto;
-		UserVO outVO = new UserVO();
+		UserVO inVO = (UserVO) dto; //입력
+		UserVO outVO = new UserVO(); //출력
 
 		if (idCheck(dto) != 1) {
 			outVO.setId("-1");
@@ -64,24 +63,10 @@ public class UserDAO {
 		}
 		
 		// 로그인 성공, msg = 1
-		outVO = map.get(inVO.getId());
+		outVO = map.get(inVO.getId()); //outVO는 inVO의 id값을 키값으로 하여 출력한 값
 		outVO.setMsgId("1");
 		return outVO;
 
-	}
-
-	public int do_delete(DTO dto) {
-		UserVO inVo = (UserVO) dto;
-		int flag = 0;
-		if (map.containsKey(inVo.getId())) {
-			int currCnt = map.size();
-			map.remove(inVo.getId());
-			// 저장Data전달.
-			int deleteCnt = writeMapToFile(map);
-			if (currCnt == (deleteCnt + 1))
-				flag = 1;
-		}
-		return flag;
 	}
 
 	public int do_save(DTO dto) {
@@ -125,7 +110,7 @@ public class UserDAO {
 				br.append(tmpVO.getAddress());
 				br.append(divStr);
 				br.append(tmpVO.getTel());
-
+				//컴마를 구분자로 Stringbuilder에  UserVO요소를 저장함
 				bw.write(br.toString());
 				bw.newLine();
 				writeCnt++;
@@ -148,36 +133,6 @@ public class UserDAO {
 		}
 		return writeCnt;
 	}// writeMapTOFile	
-
-	public int readCSV_TO_List() {
-		FileReader reader = null;
-		BufferedReader br = null;
-		try {
-			reader = new FileReader(filePath);
-			br = new BufferedReader(reader);
-
-			String line = "";
-			while ((line = br.readLine()) != null) {
-				if (line.indexOf(",") != -1) {
-					String[] tmpData = line.split(",");
-					UserVO vo = new UserVO(tmpData[0], tmpData[1], tmpData[2], tmpData[3], tmpData[4], tmpData[5]);
-					list.add(vo);
-				}
-			} // while
-		} catch (IOException e) {
-			System.out.println("=IOException=");
-			e.printStackTrace();
-
-		} finally {
-			try{
-				br.close();
-			} catch (IOException e) {
-				System.out.println("=finally IOException=");
-				e.printStackTrace();
-			}
-		}
-		return list.size();
-	}
 
 	public int readCSV_TO_Map() {
 

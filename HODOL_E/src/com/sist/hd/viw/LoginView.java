@@ -121,7 +121,7 @@ public class LoginView extends JPanel implements ActionListener {
 				MainFrame.session = outVO;
 				outVO.setMsg(MainFrame.session.getId() + "님 환영합니다.");
 				JOptionPane.showMessageDialog(win, outVO.getMsg(), "Message", JOptionPane.INFORMATION_MESSAGE);
-		
+				
 				MainView main = new MainView(win);
 				win.change("main", main);
 			}

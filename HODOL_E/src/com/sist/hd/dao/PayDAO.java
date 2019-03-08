@@ -15,7 +15,6 @@ import java.util.Map.Entry;
 
 import com.sist.hd.vo.DTO;
 import com.sist.hd.vo.PayVO;
-import com.sist.hd.vo.UserVO;
 
 public class PayDAO {
 	private String filePath_pay = "src\\csv\\payList.csv";
@@ -23,7 +22,6 @@ public class PayDAO {
 	public HashMap<String, PayVO> map2 = new HashMap<String, PayVO>();
 
 	public PayDAO(){		
-		int result = readCSV_TO_List();
 		readCSV_TO_Map();
 	}
 	
@@ -31,7 +29,7 @@ public class PayDAO {
 		PayVO inVO = (PayVO) dto;
 		int flag = -1;
 		if (!map2.containsKey(inVO.getPayId())) {
-			PayVO tmpVO = map2.put(inVO.getPayId(), inVO);
+			map2.put(inVO.getPayId(), inVO);
 			int saveFlag = writeMapToFile(map2);
 			if (saveFlag > 0)
 				flag = 1;
@@ -94,37 +92,6 @@ public class PayDAO {
 		}
 		return writeCnt;
 	}// writeMapTOFile
-	
-	public int readCSV_TO_List() {
-		FileReader reader = null;
-		BufferedReader br = null;
-		try {
-			reader = new FileReader(filePath_pay);
-			br = new BufferedReader(reader);
-
-			String line = "";
-			while ((line = br.readLine()) != null) {
-				if (line.indexOf(",") != -1) {
-					String[] tmpData = line.split(",");
-					PayVO vo = new PayVO();
-					list.add(vo);
-				}
-			} // while
-		} catch (IOException e) {
-			System.out.println("=IOException=");
-			e.printStackTrace();
-
-		} finally {
-			try{
-				br.close();
-			} catch (IOException e) {
-				System.out.println("=finally IOException=");
-				e.printStackTrace();
-			}
-		}
-		return list.size();
-	}
-
 	
 	
 	public int readCSV_TO_Map() {

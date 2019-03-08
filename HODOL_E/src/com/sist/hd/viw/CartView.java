@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -71,19 +72,19 @@ public class CartView extends JPanel implements ActionListener {
 			}
 		};
 
-
-		String comboBoxT[] = { "1시", "2시", "3시", };
+		String comboBoxT[] = { "08시", "09시", "10시", };
 		setLayout(null);
 		JComboBox comboBox = new JComboBox(comboBoxT);
 		comboBox.setBounds(248, 332, 80, 25);
 		comboBox.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 13));
 		add(comboBox);
 
-		String comboBoxT_1[] = { "12시", "13시", "14시" };
+		String comboBoxT_1[] = { "18시", "19시", "20시" };
 		JComboBox comboBox_1 = new JComboBox(comboBoxT_1);
 		comboBox_1.setBounds(248, 382, 80, 25);
 		comboBox_1.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 13));
 		add(comboBox_1);
+		
 		JButton btnHome = new JButton("HOME");
 		btnHome.setBounds(361, 0, 77, 30);
 		btnHome.setBackground(Color.DARK_GRAY);
@@ -94,15 +95,23 @@ public class CartView extends JPanel implements ActionListener {
 		btnHome.setBackground(Color.DARK_GRAY);
 		btnHome.setForeground(Color.WHITE);
 		btnHome.setBorderPainted(false);
+		
 		table = new JTable(tableModel);
 		table.setFont(new Font("나눔고딕 ExtraBold", Font.BOLD, 13));
-		table.setAutoCreateRowSorter(true);
+		table.setAutoCreateRowSorter(true); // 헤더 클릭 정렬
 		table.setShowVerticalLines(false); // 테이블 선 표시
-		table.setShowHorizontalLines(false);
+		table.setShowHorizontalLines(false); // 테이블 선 표시
+		
+		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+		rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
+		table.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
+		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(92, 85, 267, 189);
 		add(scrollPane);
 		scrollPane.setPreferredSize(new Dimension(280, 150));
+		
+		
 
 		JLabel title1 = new JLabel("장바구니");
 		title1.setBounds(0, 2, 116, 23);
@@ -193,7 +202,7 @@ public class CartView extends JPanel implements ActionListener {
 					else {
 						DefaultTableModel model = (DefaultTableModel) table.getModel();
 						model.removeRow(row);
-						n5.setText(Currency.getInstance(Locale.KOREA).getSymbol() + CartCtrl.totalprice(table)); // 합산가격
+						n5.setText(Currency.getInstance(Locale.KOREA).getSymbol() + CartCtrl.totalprice(table) + "원"); // 합산가격
 																													// 업데이트
 						CartCtrl.cartList2.clear();
 						for (int i = 0; i < model.getRowCount(); i++) {

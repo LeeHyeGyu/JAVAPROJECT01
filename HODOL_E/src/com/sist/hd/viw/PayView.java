@@ -15,7 +15,7 @@ import com.sist.hd.ctrl.PayCtrl;
 import com.sist.hd.vo.PayVO;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.SystemColor;
+
 
 @SuppressWarnings("serial")
 public class PayView extends JPanel {	

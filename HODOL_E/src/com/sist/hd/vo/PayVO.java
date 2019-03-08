@@ -93,87 +93,11 @@ public class PayVO extends DTO{
 		this.deliveryTime = deliveryTime;
 	}
 
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((deliveryTime == null) ? 0 : deliveryTime.hashCode());
-		result = prime * result + ((launList == null) ? 0 : launList.hashCode());
-		result = prime * result + ((launName == null) ? 0 : launName.hashCode());
-		result = prime * result + ((payId == null) ? 0 : payId.hashCode());
-		result = prime * result + ((pickupTime == null) ? 0 : pickupTime.hashCode());
-		result = prime * result + ((totalPrice == null) ? 0 : totalPrice.hashCode());
-		result = prime * result + ((userAddress == null) ? 0 : userAddress.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
-		return result;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PayVO other = (PayVO) obj;
-		if (deliveryTime == null) {
-			if (other.deliveryTime != null)
-				return false;
-		} else if (!deliveryTime.equals(other.deliveryTime))
-			return false;
-		if (launList == null) {
-			if (other.launList != null)
-				return false;
-		} else if (!launList.equals(other.launList))
-			return false;
-		if (launName == null) {
-			if (other.launName != null)
-				return false;
-		} else if (!launName.equals(other.launName))
-			return false;
-		if (payId == null) {
-			if (other.payId != null)
-				return false;
-		} else if (!payId.equals(other.payId))
-			return false;
-		if (pickupTime == null) {
-			if (other.pickupTime != null)
-				return false;
-		} else if (!pickupTime.equals(other.pickupTime))
-			return false;
-		if (totalPrice == null) {
-			if (other.totalPrice != null)
-				return false;
-		} else if (!totalPrice.equals(other.totalPrice))
-			return false;
-		if (userAddress == null) {
-			if (other.userAddress != null)
-				return false;
-		} else if (!userAddress.equals(other.userAddress))
-			return false;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
-			return false;
-		return true;
-	}
-
 	@Override
 	public String toString() {
 		return "PayVO [launName=" + launName + ", userId=" + userId + ", payId=" + payId + ", launList=" + launList
 				+ ", userAddress=" + userAddress + ", totalPrice=" + totalPrice + ", pickupTime=" + pickupTime
 				+ ", deliveryTime=" + deliveryTime + "]";
 	}
-
-
-
-
-		
 	
 }
